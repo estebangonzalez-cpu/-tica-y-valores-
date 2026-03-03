@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ética Profesional: Valor Moral vs Relativismo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-dark: #0f0f1a;
+            --bg-card: #161622;
+            --accent-gold: #d4af37;
+            --accent-crimson: #c41e3a;
+            --accent-purple: #6b4c7a;
+            --text-primary: #f5f5f0;
+            --text-secondary: #a0a0a0;
+            --gradient-hero: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+            --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Navegación minimalista */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            z-index: 100;
+        }
+        
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .nav-dot::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            transition: all 0.4s;
+        }
+        
+        .nav-dot.active {
+            background: var(--accent-gold);
+            transform: scale(1.4);
+        }
+        
+        .nav-dot.active::after {
+            border-color: var(--accent-gold);
+        }
+        
+        /* Tipografía elegante */
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        /* Secciones base */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        /* PORTADA - Diseño editorial premium */
+        .hero {
+            background: var(--gradient-hero);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(196, 30, 58, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .kicker {
+            font-size: 0.85rem;
+            color: var(--accent-crimson);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        
+        .headline {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+        
+        .headline .highlight {
+            color: var(--accent-gold);
+            position: relative;
+            display: inline;
+        }
+        
+        .headline .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-crimson);
+            transform: scaleX(0);
+            transform-origin: right;
+            animation: underline 1.5s ease forwards 0.5s;
+        }
+        
+        @keyframes underline {
+            to { transform: scaleX(1); transform-origin: left; }
+        }
+        
+        .subhead {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+        
+        .meta-box {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1.5rem 2.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(10px);
+        }
+        
+        .meta-box strong {
+            color: var(--accent-gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        .meta-box em {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-style: normal;
+        }
+        
+        /* SECCIÓN 2: Conceptos - Layout asimétrico */
+        .concepts-section {
+            background: var(--bg-dark);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+        
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .concept-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2.5rem;
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        
+        .concept-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .concept-card.absoluto::before {
+            background: var(--accent-gold);
+        }
+        
+        .concept-card.relativo::before {
+            background: var(--accent-crimson);
+        }
+        
+        .concept-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .concept-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .concept-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .concept-card.absoluto h3 {
+            color: var(--accent-gold);
+        }
+        
+        .concept-card.relativo h3 {
+            color: var(--accent-crimson);
+        }
+        
+        .concept-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        
+        .vs-divider {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: var(--bg-dark);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            z-index: 10;
+        }
+        
+        /* SECCIÓN 3: Caso y Claves - Layout dividido */
+        .case-section {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #12121c 100%);
+        }
+        
+        .case-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        /* Caso */
+        .case-box {
+            background: rgba(196, 30, 58, 0.05);
+            border-left: 3px solid var(--accent-crimson);
+            padding: 2.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .case-box h3 {
+            color: var(--accent-crimson);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .case-scenario {
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.9;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .case-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .case-btn {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 1px solid;
+            background: transparent;
+            color: var(--text-primary);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .case-btn.gold {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+        
+        .case-btn.gold:hover {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+        }
+        
+        .case-btn.crimson {
+            border-color: var(--accent-crimson);
+            color: var(--accent-crimson);
+        }
+        
+        .case-btn.crimson:hover {
+            background: var(--accent-crimson);
+            color: white;
+        }
+        
+        /* Argumento dinámico */
+        #argument-box {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 4px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        #argument-box h4 {
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        #argument-box p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        /* Claves - Solo 3 */
+        .keys-box {
+            background: var(--gradient-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 4px;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .keys-box h4 {
+            color: var(--accent-purple);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .key-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .key-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .key-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .key-badge.absoluto {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .key-badge.relativo {
+            background: rgba(196, 30, 58, 0.15);
+            color: var(--accent-crimson);
+            border: 1px solid rgba(196, 30, 58, 0.3);
+        }
+        
+        .key-phrase {
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--text-primary);
+            line-height: 1.5;
+            margin-bottom: 0.3rem;
+        }
+        
+        .key-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* SECCIÓN 4: Reflexión corta */
+        .final-section {
+            background: var(--gradient-hero);
+            text-align: center;
+            position: relative;
+        }
+        
+        .final-section::before {
+            content: '"';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 15rem;
+            color: var(--accent-gold);
+            opacity: 0.05;
+            line-height: 1;
+        }
+        
+        .reflection-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .reflection-text {
+            font-size: 1.4rem;
+            line-height: 2;
+            color: var(--text-primary);
+            font-weight: 300;
+            margin-bottom: 3rem;
+        }
+        
+        .reflection-text strong {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+        
+        .final-quote-box {
+            padding: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: rgba(255,255,255,0.02);
+            border-radius: 4px;
+        }
+        
+        .final-quote-box p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .final-quote-box .author {
+            margin-top: 1.5rem;
+            color: var(--accent-crimson);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .concepts-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .vs-divider {
+                display: none;
+            }
+            
+            .case-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .keys-box {
+                position: static;
+            }
+            
+            .nav-dots {
+                display: none;
+            }
+        }
+        
+        /* Animaciones */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <div class="nav-dots">
+        <div class="nav-dot active" onclick="scrollToSection(0)"></div>
+        <div class="nav-dot" onclick="scrollToSection(1)"></div>
+        <div class="nav-dot" onclick="scrollToSection(2)"></div>
+        <div class="nav-dot" onclick="scrollToSection(3)"></div>
+    </div>
+
+    <!-- DIAPOSITIVA 1: Portada -->
+    <section class="section hero" id="section-0">
+        <div class="hero-content">
+            <div class="kicker">
+                Ética Profesional • Dilema Médico Contemporáneo
+            </div>
+            <h1 class="headline">
+                ¿<span class="highlight">Derecho a Morir Dignamente</span> o 
+                <span class="highlight">Violación del Juramento</span>?
+            </h1>
+            <p class="subhead">
+                El caso del Dr. Martín y la eutanasia: un análisis filosófico sobre 
+                si los valores morales son absolutos o relativos al contexto
+            </p>
+            <div class="meta-box">
+                <strong>Caso de Estudio: Eutanasia</strong>
+                <em>Presentación para clase de Ética Profesional</em>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIAPOSITIVA 2: Conceptos Fundamentales -->
+    <section class="section concepts-section" id="section-1">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 class="section-title">
+                    Los Dos Protagonistas
+                </h2>
+            </div>
+            
+            <div class="concepts-grid fade-in">
+                <div class="concept-card absoluto">
+                    <span class="concept-icon">⚖️</span>
+                    <h3>Valor Moral Absoluto</h3>
+                    <p>
+                        Principios universales e inmutables. La vida es un valor inviolable 
+                        que trasciende el sufrimiento, la cultura o la legalidad. 
+                        Existe un bien y mal objetivo, independientemente de las opiniones personales.
+                    </p>
+                </div>
+                
+                <div class="vs-divider">VS</div>
+                
+                <div class="concept-card relativo">
+                    <span class="concept-icon">🌊</span>
+                    <h3>Relativismo Moral</h3>
+                    <p>
+                        No existen verdades morales universales. Los valores dependen del contexto 
+                        cultural, histórico y personal. La eutanasia puede ser moral en una sociedad 
+                        y no en otra; ambas posturas son válidas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIAPOSITIVA 3: Caso + 3 Claves -->
+    <section class="section case-section" id="section-2">
+        <div class="container">
+            <div class="case-container fade-in">
+                <!-- Caso -->
+                <div class="case-box">
+                    <h3>
+                        <span>🚨</span> 
+                        El Caso del Dr. Martín
+                    </h3>
+                    <div class="case-scenario">
+                        "Rafael, 68 años, cáncer terminal metastásico. Sufre dolor insoportable 
+                        pese a paliativos máximos, dependencia total y depresión profunda. 
+                        Solicita eutanasia activa según la ley vigente. Su médico, el Dr. Martín, 
+                        debe decidir: ¿practica la eutanasia cumpliendo la ley y la autonomía del 
+                        paciente, o se niega protegiendo su juramento hipocrático de 'no matar'?"
+                    </div>
+                    
+                    <div class="case-buttons">
+                        <button class="case-btn gold" onclick="showArgument('absoluto')">
+                            Perspectiva Absolutista
+                        </button>
+                        <button class="case-btn crimson" onclick="showArgument('relativo')">
+                            Perspectiva Relativista
+                        </button>
+                    </div>
+                    
+                    <div id="argument-box">
+                        <h4 id="arg-title"></h4>
+                        <p id="arg-content"></p>
+                    </div>
+                </div>
+                
+                <!-- Solo 3 Claves -->
+                <div class="keys-box">
+                    <h4>🔍 Claves para Identificar</h4>
+                    
+                    <div class="key-item">
+                        <span class="key-badge absoluto">Absoluto</span>
+                        <p class="key-phrase">
+                            "La vida es inviolable, sin excepciones"
+                        </p>
+                        <span class="key-label">Principio universal</span>
+                    </div>
+                    
+                    <div class="key-item">
+                        <span class="key-badge relativo">Relativo</span>
+                        <p class="key-phrase">
+                            "Mi cuerpo, mi decisión; quién soy para imponer mi verdad"
+                        </p>
+                        <span class="key-label">Autonomía radical</span>
+                    </div>
+                    
+                    <div class="key-item">
+                        <span class="key-badge absoluto">Absoluto</span>
+                        <span class="key-badge relativo" style="margin-left: 0.5rem;">Relativo</span>
+                        <p class="key-phrase" style="margin-top: 0.5rem;">
+                            "El sufrimiento redime" vs "Prolongar el dolor es cruel"
+                        </p>
+                        <span class="key-label">Visión del sufrimiento</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIAPOSITIVA 4: Reflexión Final Corta -->
+    <section class="section final-section" id="section-3">
+        <div class="container">
+            <div class="reflection-content fade-in">
+                <p class="reflection-text">
+                    El debate sobre la eutanasia expone la tensión entre el 
+                    <strong>valor absoluto de la vida</strong> y el 
+                    <strong>respeto a la autonomía individual</strong>. 
+                    El desafío ético no es elegir un bando, sino integrar ambas perspectivas: 
+                    reconocer la dignidad inviolable de la persona mientras escuchamos, 
+                    con humildad, el clamor de quien sufre.
+                </p>
+                
+                <div class="final-quote-box">
+                    <p>
+                        "El profesional sanitario debe navegar entre principios universales 
+                        y sensibilidad contextual, sin perder la brújula moral ni la compasión."
+                    </p>
+                    <div class="author">
+                        — Ética Profesional
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navegación
+        function scrollToSection(index) {
+            const sections = document.querySelectorAll('.section');
+            sections[index].scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Actualizar dots
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const dots = document.querySelectorAll('.nav-dot');
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            
+            sections.forEach((section, index) => {
+                if (scrollPosition >= section.offsetTop && 
+                    scrollPosition < section.offsetTop + section.offsetHeight) {
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    dots[index].classList.add('active');
+                }
+            });
+            
+            // Animaciones
+            document.querySelectorAll('.fade-in').forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < window.innerHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        });
+        
+        // Mostrar argumentos
+        function showArgument(type) {
+            const box = document.getElementById('argument-box');
+            const title = document.getElementById('arg-title');
+            const content = document.getElementById('arg-content');
+            
+            box.style.display = 'block';
+            
+            if (type === 'absoluto') {
+                title.textContent = 'Argumento Absolutista';
+                title.style.color = '#d4af37';
+                content.innerHTML = `
+                    La vida posee valor intrínseco absoluto. El médico que administra la eutanasia, 
+                    aunque sea por compasión, traiciona su esencia sanadora. El juramento hipocrático 
+                    es un mandato universal: "primero, no hacer daño". La ley puede legalizarlo, 
+                    pero no hace moral lo intrínsecamente malo. El Dr. Martín debe negarse y 
+                    redoblar cuidados paliativos.
+                `;
+            } else {
+                title.textContent = 'Argumento Relativista';
+                title.style.color = '#c41e3a';
+                content.innerHTML = `
+                    No existe verdad moral universal sobre el final de la vida. La autonomía del 
+                    paciente es el valor supremo: "mi cuerpo, mi decisión". Prolongar el sufrimiento 
+                    agónico puede ser más cruel que la muerte. Diferentes culturas han legitimado 
+                    la eutanasia; debemos tolerar tanto al Dr. Martín (si accede) como a quien se niegue.
+                `;
+            }
+        }
+        
+        // Inicializar
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+</body>
+</html>
